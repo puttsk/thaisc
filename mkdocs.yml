@@ -1,6 +1,9 @@
 site_name: NSTDA-SC Documentation
 pages: 
   - 'Home': 'index.md'
+  - 'System Administration':
+    - 'SLURM':
+      - 'Installation': 'sysadmin/slurm/installation.md'
 theme: readthedocs
 markdown_extensions:
   - markdown.extensions.extra
