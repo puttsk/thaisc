@@ -15,11 +15,11 @@ TBD
 
 * **Putt Sakdhnagool** - *Initial work* 
 
-See also the list of [contributors](https://github.com/puttsk/cuda-tutorial/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/puttsk/nstda-sc/graphs/contributors) who participated in this project.
 
 ## Issues / Feature request
 
-You can submit bug / issues / feature request using [Tracker](https://github.com/puttsk/cuda-tutorial/issues).
+You can submit bug / issues / feature request using [Tracker](https://github.com/puttsk/nstda-sc/issues).
 
 ## License
 
