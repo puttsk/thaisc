@@ -1,5 +1,5 @@
-[![Github](https://img.shields.io/badge/sources-github-green.svg)](https://github.com/puttsk/cuda-tutorial/)[![Documentation Status](https://readthedocs.org/projects/cuda-tutorial/badge/?version=latest)](https://cuda-tutorial.readthedocs.io/en/latest/?badge=latest)
- [![GitHub forks](https://img.shields.io/github/stars/puttsk/cuda-tutorial.svg?style=social&label=Star)](https://github.com/puttsk/cuda-tutorial)
+[![Github](https://img.shields.io/badge/sources-github-green.svg)](https://github.com/puttsk/nstda-sc/)[![Documentation Status](https://readthedocs.org/projects/nstda-sc/badge/?version=latest)](https://nstda-sc.readthedocs.io/en/latest/?badge=latest)
+ [![GitHub forks](https://img.shields.io/github/stars/puttsk/nstda-sc.svg?style=social&label=Star)](https://github.com/puttsk/nstda-sc)
 
 # NSTDA-SC Documentation 
 
