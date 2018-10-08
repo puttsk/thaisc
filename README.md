@@ -1,11 +1,11 @@
-[![Github](https://img.shields.io/badge/sources-github-green.svg)](https://github.com/puttsk/nstda-sc/)[![Documentation Status](https://readthedocs.org/projects/nstda-sc/badge/?version=latest)](https://nstda-sc.readthedocs.io/en/latest/?badge=latest)
- [![GitHub forks](https://img.shields.io/github/stars/puttsk/nstda-sc.svg?style=social&label=Star)](https://github.com/puttsk/nstda-sc)
+[![Github](https://img.shields.io/badge/sources-github-green.svg)](https://github.com/puttsk/thaisc/)[![Documentation Status](https://readthedocs.org/projects/thaisc/badge/?version=latest)](https://thaisc.readthedocs.io/en/latest/?badge=latest)
+ [![GitHub forks](https://img.shields.io/github/stars/puttsk/thaisc.svg?style=social&label=Star)](https://github.com/puttsk/thaisc)
 
-# NSTDA-SC Documentation
+# ThaiSC Documentation
 
-This repository contains documentation for NSTDA-SC
+This repository contains documentation for ThaiSC
 
-* [Online Reference Version](https://nstdasc.readthedocs.io/en/latest/?badge=latest) 
+* [Online Reference Version](https://thaisc.readthedocs.io/en/latest/?badge=latest) 
 
 ## Contributing
 
