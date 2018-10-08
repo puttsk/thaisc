@@ -24,7 +24,7 @@ copyright = '2018, ThaiSC'
 author = 'Putt Sakdhnagool'
 
 # The short X.Y version
-version = ''
+version = '0.1'
 # The full version, including alpha/beta/rc tags
 release = ''
 
@@ -44,19 +44,19 @@ extensions = [
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
-from recommonmark.parser import CommonMarkParser
+#from recommonmark.parser import CommonMarkParser
 
-source_parsers = {
-	'.md': CommonMarkParser,
-}
+#source_parsers = {
+#	'.md': CommonMarkParser,
+#}
 
-source_suffix = ['.rst', '.md']
+# source_suffix = ['.rst', '.md']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-# source_suffix = '.rst'
+source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
