@@ -20,28 +20,31 @@ Contents
 
     tara/index
     sysadmin/index
+    contribute
 
-Contributing
-============
+.. only:: html
 
-TBD
+    Contributing
+    ============
 
-Authors
-=======
+    See. :doc:`Contributing </contribute>`
 
-* **Putt Sakdhnagool** - *Initial work* 
+    Authors
+    =======
 
-See also the list of contributors_ who participated in this project.
+    * **Putt Sakdhnagool** - *Initial work* 
 
-Issues / Feature request
-========================
+    See also the list of contributors_ who participated in this project.
 
-You can submit bug / issues / feature request using Tracker_.
+    Issues / Feature request
+    ========================
 
-License
-=======
+    You can submit bug / issues / feature request using Tracker_.
 
-TBD
+    License
+    =======
+
+    TBD
 
 .. _contributors: https://github.com/puttsk/nstda-sc/graphs/contributors
 .. _Tracker: https://github.com/puttsk/nstda-sc/issues

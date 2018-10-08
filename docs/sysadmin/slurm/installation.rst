@@ -11,7 +11,7 @@ Install prerequisites
 
     yum install rpm-build gcc gcc-c++ bzip2-devel openssl-devel zlib-devel
 
-Download MUNGE from its `repository <https://github.com/dun/munge>` 
+Download MUNGE from its `repository <https://github.com/dun/munge>`_ 
 
 .. code:: bash
     
