@@ -3,17 +3,17 @@
   |github badge|_ |doc badge|_ |star badge|_
 
   .. |github badge| image:: https://img.shields.io/badge/sources-github-green.svg 
-  .. |doc badge| image:: https://readthedocs.org/projects/nstda-sc/badge/?version=latest
+  .. |doc badge| image:: https://readthedocs.org/projects/thaisc/badge/?version=latest
   .. |star badge| image:: https://img.shields.io/github/stars/puttsk/nstda-sc.svg?style=social&label=Star
-  .. _github badge: https://github.com/puttsk/nstda-sc/
+  .. _github badge: https://github.com/puttsk/thaisc/
   .. _doc badge: https://nstda-sc.readthedocs.io/en/latest/?badge=latest
-  .. _star badge: https://github.com/puttsk/nstda-sc
+  .. _star badge: https://github.com/puttsk/thaisc
 
 ==========================
-Tara Cluster Documentation 
+ThaiSC Documentation 
 ==========================
 
-This repository contains a set of documents for Tara Cluster
+This repository contains a set of documents for ThaiSC
 
 Contributing
 ============

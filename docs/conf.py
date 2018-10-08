@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'ThaiSC - Tara Cluster'
+project = 'ThaiSC'
 copyright = '2018, ThaiSC'
 author = 'Putt Sakdhnagool'
 
