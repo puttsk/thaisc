@@ -13,7 +13,12 @@
 ThaiSC Documentation 
 ==========================
 
-This repository contains a set of documents for ThaiSC
+Contents
+
+.. toctree::
+   :maxdepth: 2
+
+   sysadmin/index
 
 Contributing
 ============
