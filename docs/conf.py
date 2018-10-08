@@ -19,8 +19,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'NSTDA-SC Documentation'
-copyright = '2018, Putt Sakdhnagool'
+project = 'ThaiSC - Tara Cluster'
+copyright = '2018, ThaiSC'
 author = 'Putt Sakdhnagool'
 
 # The short X.Y version

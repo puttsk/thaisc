@@ -7,11 +7,11 @@
 .. _doc badge: https://nstda-sc.readthedocs.io/en/latest/?badge=latest
 .. _star badge: https://github.com/puttsk/nstda-sc
 
-======================
-NSTDA-SC Documentation 
-======================
+==========================
+Tara Cluster Documentation 
+==========================
 
-This repository contains a set of documents for NSTDA-SC 
+This repository contains a set of documents for Tara Cluster
 
 Contributing
 ============
@@ -23,15 +23,17 @@ Authors
 
 * **Putt Sakdhnagool** - *Initial work* 
 
-See also the list of [contributors](https://github.com/puttsk/nstda-sc/graphs/contributors) who participated in this project.
+See also the list of contributors_ who participated in this project.
 
 Issues / Feature request
 ========================
 
-You can submit bug / issues / feature request using [Tracker](https://github.com/puttsk/nstda-sc/issues).
+You can submit bug / issues / feature request using Tracker_.
 
 License
 =======
 
 TBD
 
+.. _contributors: https://github.com/puttsk/nstda-sc/graphs/contributors
+.. _Tracker: https://github.com/puttsk/nstda-sc/issues
