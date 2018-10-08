@@ -26,7 +26,7 @@ author = 'Putt Sakdhnagool'
 # The short X.Y version
 version = '0.1'
 # The full version, including alpha/beta/rc tags
-release = ''
+release = '0.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -44,19 +44,19 @@ extensions = [
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
-#from recommonmark.parser import CommonMarkParser
+from recommonmark.parser import CommonMarkParser
 
-#source_parsers = {
-#	'.md': CommonMarkParser,
-#}
+source_parsers = {
+	'.md': CommonMarkParser,
+}
 
-# source_suffix = ['.rst', '.md']
+source_suffix = ['.rst', '.md']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+# source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
@@ -146,7 +146,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'thaisc-documentation', 'ThaiSC Documentation',
+    (master_doc, 'thaiscdocumentation', 'ThaiSC Documentation',
      [author], 1)
 ]
 
