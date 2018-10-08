@@ -16,9 +16,10 @@ ThaiSC Documentation
 Contents
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-   sysadmin/index
+    tara/index
+    sysadmin/index
 
 Contributing
 ============

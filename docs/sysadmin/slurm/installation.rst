@@ -2,10 +2,6 @@
 Installation
 =================
 
-.. only:: html
-
-    .. contents::
-
 Install MUNGE
 ==============
 
