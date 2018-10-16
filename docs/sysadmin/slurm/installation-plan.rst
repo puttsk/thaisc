@@ -71,6 +71,7 @@ Prerequisites
     * *Clean* installation of CentOS 7. (If possible, the initial state of Tara cluster machines.)
     * ``freeIPA``.
     * ``NTP`` (Should be installed as a part of ``freeIPA``)
+    * ``nhc`` Node health check. Installed from `nhc <https://github.com/mej/nhc>`_
     * An NFS storage mounted to all machines. (Can we create a virtual HDD and mount it to all machine?)
     * Name resolution mechanism either through DNS or ``/etc/hosts`` files. 
 
@@ -130,19 +131,24 @@ Plugins                       Dependencies
 Configuration
 ==================
 
-===================  =======================  ==========
-Config               Value                    Detail
-===================  =======================  ==========
-**AuthType**         *munge*
-**CryptoType**       *munge* 
-**PriorityType**     *priority/multifactor*   See. `Multifactor plugin <https://slurm.schedmd.com/priority_multifactor.html>`_
-**SchedType**        *backfill*
-**SelectType**       *select/cons_res*        Might require ``cons_res`` plugin See. `Consumable Resources in Slurm <https://slurm.schedmd.com/cons_res.html>`_ 
-**TopologyPlugin**                            Should consider using plugin for tree topology
-===================  =======================  ==========
+=========================  =======================  ==========
+Config                     Value                    Detail
+=========================  =======================  ==========
+**AuthType**               *munge*
+**CryptoType**             *munge* 
+**PriorityType**           *priority/multifactor*   See. `Multifactor plugin <https://slurm.schedmd.com/priority_multifactor.html>`_
+**SchedType**              *backfill*
+**SelectType**             *select/cons_res*        See. `Consumable Resources in Slurm <https://slurm.schedmd.com/cons_res.html>`_ 
+**SelectTypeParameters**  
+**PreemptMode**      
+**TopologyPlugin**                                  Should consider using plugin for tree topology
+**HealthCheckProgram**     ``/usr/sbin/nhc``        For ``nhc`` See. `[1] <https://wiki.fysik.dtu.dk/niflheim/Slurm_configuration#node-health-check>`_ and `[2] <https://slurm.schedmd.com/SUG14/node_health_check.pdf>`_
+**HealthCheckInterval**    *3600*                   
+**HealthCheckNodeState**   *ANY*                    
+=========================  =======================  ==========
 
-Node Configuration (Pilot System)
-==================================
+Node Configuration (Testing System)
+===================================
 
 ============  =============  =============================  ===========
 Node Class    NodeName       Host Name                      Notes
@@ -176,8 +182,8 @@ dgx           dgx[1-2]       dgx[1-2].tara.nstda.or.th      dgx1 is reserved.
     NodeName=dgx[1-2] CPUs=2 RealMemory=2048 Sockets=1 CoresPerSocket=2 ThreadsPerCore=1 Gres=gpu:volta:8 State=UNKNOWN 
 
 
-Partitions (Pilot System)
-==========================
+Partitions (Testing System)
+===========================
 ===============  =============  ==========  =====  ===========
 Partition        AllocNodes     MaxTime     State  Additional Parameters
 ===============  =============  ==========  =====  ===========
