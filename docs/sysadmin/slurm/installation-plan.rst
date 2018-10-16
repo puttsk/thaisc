@@ -16,9 +16,9 @@ Important Date       Plan
 24 Oct 2018          **Implementation**: Prepare the machines to the :ref:`prerequisites` state and **document** for initializing the machines. 
                      
                      **Testing**: Prepare the plan and, if possible, automate script to test initail services in :ref:`prerequisites`.
-31 Oct 2018          **Implementation**: 
+31 Oct 2018          **Implementation**: Implementation document for SLURM
                      
-                     **Testing**: 
+                     **Testing**: Plan and testing script for SLURM. 
 07 Nov 2018          **Implementation**: 
                      
                      **Testing**:                      
@@ -39,7 +39,7 @@ Teams
 ================  =========
 Implementation    Testing 
 ================  =========
-\-                \-
+P Ar+, Arm        Best, Oat, Eee
 ================  =========
 
 
@@ -153,14 +153,14 @@ Node Configuration (Testing System)
 ============  =============  =============================  ===========
 Node Class    NodeName       Host Name                      Notes
 ============  =============  =============================  ===========
-freeipa       \-             freeipa.tara.nstda.or.th       VM
-slurmctrl     slurmctrl      slurmctld.tara.nstda.or.th     VM
+freeipa       \-             freeipa.hpc.nstda.or.th        VM
+slurmctrl     slurmctrl      slurmctld.hpc.nstda.or.th      VM
 slurmdbd      slurmdbd       slurmdbd.hpc.nstda.or.th       VM
 mysql         \-             mysql.hpc.nstda.or.th          VM, MySQL or MariaDB ? 
 frontend      \-             tara.nstda.or.th
-compute       compute[1-8]   compute[1-8].tara.nstda.or.th 
-memory        memory[1-2]    memory[1-2].tara.nstda.or.th   FAT nodes
-dgx           dgx[1-2]       dgx[1-2].tara.nstda.or.th      dgx1 is reserved. 
+compute       compute[1-8]   compute[1-8].hpc.nstda.or.th 
+memory        memory[1-2]    memory[1-2].hpc.nstda.or.th    FAT nodes
+dgx           dgx[1-2]       dgx[1-2].hpc.nstda.or.th       dgx1 is reserved. 
 ============  =============  =============================  ===========
 
 .. warning:: Changes in node configuration (e.g. adding nodes, changing their processor count, etc.) require restarting both the ``slurmctld`` daemon and the ``slurmd`` daemons.
