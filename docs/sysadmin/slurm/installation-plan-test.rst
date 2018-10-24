@@ -138,32 +138,32 @@ Configuration in ``/etc/slurm.conf``
 
 .. tabularcolumns:: |l|l|p{6cm}|
 
-=========================  ================================  ==========
-Config                     Value                             Detail
-=========================  ================================  ========== 
-**SlurmctldHost**          *slurmctld*                       Might need to set as *slurmctld slurmctld.hpc.nstda.or.th*
+=========================  ==================================  ==========
+Config                     Value                               Detail
+=========================  ==================================  ========== 
+**SlurmctldHost**          *slurmctld*                         Might need to set as *slurmctld slurmctld.hpc.nstda.or.th*
 **AuthType**               *auth/munge*
 **CryptoType**             *crypto/munge* 
 **GresTypes**              *gpu*
 
-**JobRequeue**             *1*                               Automatically requeue batch jobs after node fail or preemption.
+**JobRequeue**             *1*                                 Automatically requeue batch jobs after node fail or preemption.
 **LaunchType**             *launch/slurm*
 
 **MailProg**               ``/bin/mail``
 
 **MpiDefault**             *pmix*
 
-**PrivateData**            *jobs,usage,users*                Prevents users from viewing, jobs, usage of any other user, and information of any user other than themselves.
+**PrivateData**            *jobs,usage,users*                  Prevents users from viewing, jobs, usage of any other user, and information of any user other than themselves.
 **ProctrackType**          *proctrack/cgroup*
 
-**SlurmctldPidFile**       ``/var/run/slurmctld.pid``
+**SlurmctldPidFile**       ``/var/run/slurm/slurmctld.pid``    Local file
 **SlurmctldPort**          *6817*                         
-**SlurmdPidFile**          ``/var/run/slurmd.pid``
+**SlurmdPidFile**          ``/var/run/slurm/slurmd.pid``       Local file
 **SlurmdPort**             *6818*
-**SlurmdSpoolDir**         ``/var/spool/slurmd``             Should be local file system
+**SlurmdSpoolDir**         ``/var/spool/slurmd``               Should be local file system
 **SlurmUser**              *slurm*
 **SlurmdUser**             *root*
-**StateSaveLocation**      ``/var/spool/slurm.state``
+**StateSaveLocation**      ``/var/spool/slurm.state``          Should be local file system
 
 **SwitchType**             *switch/none*
 
@@ -171,13 +171,13 @@ Config                     Value                             Detail
 **TaskPluginParam**        *Sched*
 
 **TopologyPlugin**         *topology/tree*                                
-**RoutePlugin**            *route/topology*                  **[TBD]**
-**TmpFS**                  ``/tmp``                          A node's TmpDisk space
-
-**CpuFreqGovernors**       *OnDemand, Performance,*          See. :ref:`cpu-governers`
+**RoutePlugin**            *route/topology*                    **[TBD]**
+**TmpFS**                  ``/tmp``                            A node's TmpDisk space
+    
+**CpuFreqGovernors**       *OnDemand, Performance,*            See. :ref:`cpu-governers`
                            *PowerSave, UserSpace*
-**CpuFreqDef**             *Performance*                     Default: Run the CPU at the maximum frequency.
-=========================  ================================  ==========
+**CpuFreqDef**             *Performance*                       Default: Run the CPU at the maximum frequency.
+=========================  ==================================  ==========
 
 * **SlurmctldPort** can use a range of port. Should we use 1 port per frontend? 
 
@@ -283,7 +283,7 @@ Config                         Value                             Detail
 
 **SlurmctldLogFile**           ``/var/log/slurm/slurmctld.log``
 **SlurmdLogFile**              ``/var/log/slurm/slurmd.log``
-**SlurmSchedLogFile**          ``/var/log/slurmsched.log``
+**SlurmSchedLogFile**          ``/var/log/slurm/slurmsched.log``
 **SlurmSchedLogLevel**         *1*                               Enable scheduler logging
 
 **AccountingStorageTRES**                                        **[TBD]** Default: Billing, CPU, Energy, Memory, Node, and FS/Disk. 
