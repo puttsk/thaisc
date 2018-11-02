@@ -78,24 +78,36 @@ Prerequisites
 
 * A Unix user **slurm** for use by ``slurmctld`` on all nodes of the cluster. 
 
-TODO
-===================
+Machine Configuration
+======================
 
-* Install and config MUNGE on all nodes
-* Build SLURM RPMs and install on each node as shown in :ref:`slurm-services`. To enable required plugins see. :ref:`slurm-plugins` for the list of additional libraries. 
+============  ====================  ================  ===============  ======
+Node Class    NodeName              IP (InfiniBand)   IP (1GbE)        Notes
+============  ====================  ================  ===============  ======
+freeipa       freeipa                                 172.21.5.2       VM
+slurmctld     slurmctld                               172.21.5.3       VM
+slurmdbd      slurmdbd                                172.21.5.4       VM
+mysql         mysql                                   172.21.5.5       VM
+frontend      tara-frontend-1       172.20.1.2        172.21.1.2
+compute       tara-c-[001-006]      172.20.10.1 -     172.21.10.1 -
+                                    172.20.10.6       172.20.10.6
+memory        tara-m-[001-002]      172.20.20.1 -     172.21.20.1 -    FAT nodes
+                                    172.20.20.2       172.21.20.2
+dgx           tara-dgx1-[001-002]   172.20.31.1 -     172.21.31.1 -    dgx1 is reserved. 
+                                    172.20.31.2       172.21.31.2
+============  ====================  ================  ===============  ======
 
-    * Set ``SlurmUser`` in the ``slurm.conf`` configuration file.     
-    * Files and directories used by ``slurmctld`` will need to be readable or writable by the user SlurmUser (the Slurm configuration files must be readable; the log file directory and state save directory must be writable).
-    * The parent directories for Slurm's log files, process ID files, state save directories, etc. **are not created by Slurm**. They must be created and made writable by SlurmUser as needed prior to starting Slurm daemons.
+Machine Layout
+----------------
 
-* Configure SLURM PAM module to limit access to allocated compute nodes. 
-
-    * On job termination, any processes initiated by the user outside of Slurm's control may be killed using an ``Epilog`` script configured in ``slurm.conf``.
+.. image:: testing-diagram.jpg
 
 .. _slurm-services:
 
 SLURM Services
 =====================
+
+SLURM package to be installed 
 
 .. tabularcolumns:: |l|l|
 
@@ -124,12 +136,14 @@ Plugins                       Dependencies
 **MUNGE**                     ``munge-devel``     
 **PAM Support**               ``pam-devel``       
 **cgroup Task Affinity**      ``hwloc-devel``     
-**cgroup NUMA Affinity**      ???                 
 **IPMI Engergy Consumption**  ``freeimpi-devel``  
-**InfiniBand Accounting**     ``libibmad-devel``, ``libibumad-devel`` 
 **Lua Support**               ``lua-devel``       
 **My SQL Support**            ``mysql-devel``     
 ============================  =====================
+
+* [TBD]
+    * **InfiniBand Accounting**: ``libibmad-devel``, ``libibumad-devel`` 
+    * **cgroup NUMA Affinity**: ???                 
 
 Configuration
 ==================
@@ -138,32 +152,32 @@ Configuration in ``/etc/slurm.conf``
 
 .. tabularcolumns:: |l|l|p{6cm}|
 
-=========================  ==================================  ==========
-Config                     Value                               Detail
-=========================  ==================================  ========== 
-**SlurmctldHost**          *slurmctld*                         Might need to set as *slurmctld slurmctld.hpc.nstda.or.th*
+=========================  ====================================  ==========
+Config                     Value                                 Detail
+=========================  ====================================  ========== 
+**SlurmctldHost**          *slurmctld*                           Might need to set as *slurmctld slurmctld.hpc.nstda.or.th*
 **AuthType**               *auth/munge*
 **CryptoType**             *crypto/munge* 
 **GresTypes**              *gpu*
 
-**JobRequeue**             *1*                                 Automatically requeue batch jobs after node fail or preemption.
+**JobRequeue**             *1*                                   Automatically requeue batch jobs after node fail or preemption.
 **LaunchType**             *launch/slurm*
 
 **MailProg**               ``/bin/mail``
 
 **MpiDefault**             *pmix*
 
-**PrivateData**            *jobs,usage,users*                  Prevents users from viewing, jobs, usage of any other user, and information of any user other than themselves.
+**PrivateData**            *jobs,usage,users*                    Prevents users from viewing, jobs, usage of any other user, and information of any user other than themselves.
 **ProctrackType**          *proctrack/cgroup*
 
-**SlurmctldPidFile**       ``/var/run/slurm/slurmctld.pid``    Local file
+**SlurmctldPidFile**       ``/var/run/slurm/slurmctld.pid``      Local file
 **SlurmctldPort**          *6817*                         
-**SlurmdPidFile**          ``/var/run/slurm/slurmd.pid``       Local file
+**SlurmdPidFile**          ``/var/run/slurm/slurmd.pid``         Local file
 **SlurmdPort**             *6818*
-**SlurmdSpoolDir**         ``/var/spool/slurmd``               Should be local file system
+**SlurmdSpoolDir**         ``/var/spool/slurm/slurmd``           Should be local file system
 **SlurmUser**              *slurm*
 **SlurmdUser**             *root*
-**StateSaveLocation**      ``/var/spool/slurm.state``          Should be local file system
+**StateSaveLocation**      ``/var/spool/slurm/slurm.state``      Should be local file system
 
 **SwitchType**             *switch/none*
 
@@ -171,13 +185,13 @@ Config                     Value                               Detail
 **TaskPluginParam**        *Sched*
 
 **TopologyPlugin**         *topology/tree*                                
-**RoutePlugin**            *route/topology*                    **[TBD]**
-**TmpFS**                  ``/tmp``                            A node's TmpDisk space
+**RoutePlugin**            *route/topology*                      **[TBD]**
+**TmpFS**                  ``/tmp``                              A node's TmpDisk space
     
-**CpuFreqGovernors**       *OnDemand, Performance,*            See. :ref:`cpu-governers`
-                           *PowerSave, UserSpace*
-**CpuFreqDef**             *Performance*                       Default: Run the CPU at the maximum frequency.
-=========================  ==================================  ==========
+**CpuFreqGovernors**       *OnDemand, Performance,*              See. :ref:`cpu-governers`
+                           *PowerSave, UserSpace*  
+**CpuFreqDef**             *Performance*                         Default: Run the CPU at the maximum frequency.
+=========================  ====================================  ==========
 
 * **SlurmctldPort** can use a range of port. Should we use 1 port per frontend? 
 
@@ -269,9 +283,9 @@ Logging and Accounting
 
 .. tabularcolumns:: |l|l|p{6cm}|
 
-=============================  ================================  ==========
-Config                         Value                             Detail
-=============================  ================================  ==========
+=============================  ===================================  ==========
+Config                         Value                                Detail
+=============================  ===================================  ==========
 **AccountingStorageType**      *accounting_storage/slurmdbd*
 **AccountingStoreJobComment**  *YES*
 
@@ -284,12 +298,12 @@ Config                         Value                             Detail
 **SlurmctldLogFile**           ``/var/log/slurm/slurmctld.log``
 **SlurmdLogFile**              ``/var/log/slurm/slurmd.log``
 **SlurmSchedLogFile**          ``/var/log/slurm/slurmsched.log``
-**SlurmSchedLogLevel**         *1*                               Enable scheduler logging
+**SlurmSchedLogLevel**         *1*                                  Enable scheduler logging
 
-**AccountingStorageTRES**                                        **[TBD]** Default: Billing, CPU, Energy, Memory, Node, and FS/Disk. 
-                                                                 Possible addition: GRES and license.
-**AcctGatherEnergyType**       *acct_gather_energy/ipmi*         **[TBD]** For energy consumption accounting. Only in case of exclusive job allocation the energy consumption measurements will reflect the jobs real consumption
-=============================  ================================  ==========
+**AccountingStorageTRES**                                           **[TBD]** Default: Billing, CPU, Energy, Memory, Node, and FS/Disk. 
+                                                                    Possible addition: GRES and license.
+**AcctGatherEnergyType**       *acct_gather_energy/ipmi*            **[TBD]** For energy consumption accounting. Only in case of exclusive job allocation the energy consumption measurements will reflect the jobs real consumption
+=============================  ===================================  ==========
 
 Prolog and Epilog Scripts
 --------------------------
@@ -317,18 +331,18 @@ Node Configuration (Testing System)
 
 .. tabularcolumns:: |l|l|l|l|
 
-============  ==============  ================================  ===========
-Node Class    NodeName        NodeAddr                          Notes
-============  ==============  ================================  ===========
-freeipa       \-              freeipa.hpc.nstda.or.th           VM
-slurmctld     slurmctld       slurmctld.hpc.nstda.or.th         VM
-slurmdbd      slurmdbd        slurmdbd.hpc.nstda.or.th          VM
-mysql         \-              mysql.hpc.nstda.or.th             VM, MySQL or MariaDB ? 
-frontend      \-              tara.nstda.or.th
-compute       tara-[001-008]  tara-[001-008].hpc.nstda.or.th 
-memory        tara-[010-011]  tara-[010-011].hpc.nstda.or.th    FAT nodes
-dgx           tara-[020-021]  tara-[020-021].hpc.nstda.or.th    dgx1 is reserved. 
-============  ==============  ================================  ===========
+============  ====================  ================================  
+Node Class    NodeName              Notes
+============  ====================  ================================  
+freeipa       \-                    
+slurmctld     slurmctld             
+slurmdbd      slurmdbd              
+mysql         \-                    
+frontend      \-                    
+compute       tara-c-[001-006]      
+memory        tara-m-[001-002]      FAT nodes
+dgx           tara-dgx1-[001-002]   dgx1 is reserved. 
+============  ====================  ================================  
 
 .. warning:: Changes in node configuration (e.g. adding nodes, changing their processor count, etc.) require restarting both the ``slurmctld`` daemon and the ``slurmd`` daemons.
 
@@ -345,9 +359,9 @@ dgx           tara-[020-021]  tara-[020-021].hpc.nstda.or.th    dgx1 is reserved
 .. code:: bash
 
     # COMPUTE NODES
-    NodeName=tara-[001-008] CPUs=4 RealMemory=2048 Sockets=2 CoresPerSocket=2 ThreadsPerCore=1 State=UNKNOWN TmpDisk=2048
-    NodeName=tara-[010-011] CPUs=8 RealMemory=4096 Sockets=2 CoresPerSocket=4 ThreadsPerCore=1 State=UNKNOWN TmpDisk=4096
-    NodeName=tara-[020-021] CPUs=4 RealMemory=2048 Sockets=2 CoresPerSocket=2 ThreadsPerCore=1 Gres=gpu:volta:8 State=UNKNOWN TmpDisk=2048
+    NodeName=tara-c-[001-006] CPUs=4 RealMemory=512 Sockets=2 CoresPerSocket=2 ThreadsPerCore=1 State=UNKNOWN TmpDisk=256
+    NodeName=tara-m-[001-002] CPUs=8 RealMemory=1024 Sockets=2 CoresPerSocket=4 ThreadsPerCore=1 State=UNKNOWN TmpDisk=512
+    NodeName=tara-dgx1-[001-002] CPUs=4 RealMemory=1024 Sockets=2 CoresPerSocket=2 ThreadsPerCore=1 Gres=gpu:volta:8 State=UNKNOWN TmpDisk=512
 
 
 Partitions (Testing System)
@@ -355,16 +369,16 @@ Partitions (Testing System)
 
 .. tabularcolumns:: |l|l|r|l|p{6cm}|
 
-===============  ===============  ==========  =====  ===========
-Partition        AllocNodes       MaxTime     State  Additional Parameters
-===============  ===============  ==========  =====  ===========
-debug (default)  tara-[001-002]    02:00:00   UP     DefaultTime=00:30:00
-standby          tara-[001-008]   120:00:00   UP
-memory           tara-[010-011]   120:00:00   UP
-dgx              tara-021         120:00:00   UP     OverSubscribe=EXCLUSIVE
-biobank          tara-020         UNLIMITED   UP     AllowGroups=biobank 
-                                                     OverSubscribe=EXCLUSIVE
-===============  ===============  ==========  =====  ===========
+===============  =================  ==========  =====  ===========
+Partition        AllocNodes         MaxTime     State  Additional Parameters
+===============  =================  ==========  =====  ===========
+debug (default)  tara-c-[001-002]    02:00:00   UP     DefaultTime=00:30:00
+standby          tara-c-[001-006]   120:00:00   UP
+memory           tara-m-[001-002]   120:00:00   UP
+dgx              tara-dgx1-002      120:00:00   UP     OverSubscribe=EXCLUSIVE
+biobank          tara-dgx1-001      UNLIMITED   UP     AllowGroups=biobank 
+                                                       OverSubscribe=EXCLUSIVE
+===============  =================  ==========  =====  ===========
 
 | **AllowAccounts**: Comma separated list of accounts which may execute jobs in the partition. The default value is "ALL" 
 | **AllowGroups**: Comma separated list of group names which may execute jobs in the partition. If at least one group associated with the user attempting to execute the job is in AllowGroups, he will be permitted to use this partition. Jobs executed as user root can use any partition without regard to the value of AllowGroups.
@@ -377,11 +391,11 @@ biobank          tara-020         UNLIMITED   UP     AllowGroups=biobank
 .. code:: bash
 
     # PARTITIONS
-    PartitionName=debug Nodes=tara-[001-002] Default=YES MaxTime=02:00:00 DefaultTime=00:30:00 State=UP
-    PartitionName=standby Nodes=tara-[001-008] MaxTime=120:00:00 State=UP
-    PartitionName=memory Nodes=tara-[010-011] MaxTime=120:00:00 State=UP
-    PartitionName=dgx Nodes=tara-021 MaxTime=120:00:00 State=UP OverSubscribe=EXCLUSIVE
-    PartitionName=biobank Nodes=tara-020 MaxTime=120:00:00 State=UP AllowGroups=biobank OverSubscribe=EXCLUSIVE
+    PartitionName=debug Nodes=tara-c-[001-002] Default=YES MaxTime=02:00:00 DefaultTime=00:30:00 State=UP
+    PartitionName=standby Nodes=tara-c-[001-006] MaxTime=120:00:00 State=UP
+    PartitionName=memory Nodes=tara-m-[001-002] MaxTime=120:00:00 State=UP
+    PartitionName=dgx Nodes=tara-dgx1-002 MaxTime=120:00:00 State=UP OverSubscribe=EXCLUSIVE
+    PartitionName=biobank Nodes=tara-dgx1-001 MaxTime=120:00:00 State=UP AllowGroups=biobank OverSubscribe=EXCLUSIVE
 
 
 MPI
@@ -413,3 +427,17 @@ OnDemand                   Scales the frequency dynamically according to current
 UserSpace                  Run the CPU at user specified frequencies.
 Conservative (not used)    Scales the frequency dynamically according to current load. Scales the frequency more gradually than ondemand.
 =========================  ==============
+
+TODO
+===================
+
+* Install and config MUNGE on all nodes
+* Build SLURM RPMs and install on each node as shown in :ref:`slurm-services`. To enable required plugins see. :ref:`slurm-plugins` for the list of additional libraries. 
+
+    * Set ``SlurmUser`` in the ``slurm.conf`` configuration file.     
+    * Files and directories used by ``slurmctld`` will need to be readable or writable by the user SlurmUser (the Slurm configuration files must be readable; the log file directory and state save directory must be writable).
+    * The parent directories for Slurm's log files, process ID files, state save directories, etc. **are not created by Slurm**. They must be created and made writable by SlurmUser as needed prior to starting Slurm daemons.
+
+* Configure SLURM PAM module to limit access to allocated compute nodes. 
+
+    * On job termination, any processes initiated by the user outside of Slurm's control may be killed using an ``Epilog`` script configured in ``slurm.conf``.

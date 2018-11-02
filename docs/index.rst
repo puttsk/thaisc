@@ -3,7 +3,7 @@
   |github badge|_ |doc badge|_ |star badge|_
 
   .. |github badge| image:: https://img.shields.io/badge/sources-github-green.svg 
-  .. |doc badge| image:: https://readthedocs.org/projects/thaisc/badge/?version=latest
+  .. |doc badge| image:: https://thaisc.readthedocs.io/en/latest/?badge=latest
   .. |star badge| image:: https://img.shields.io/github/stars/puttsk/nstda-sc.svg?style=social&label=Star
   .. _github badge: https://github.com/puttsk/thaisc/
   .. _doc badge: https://nstda-sc.readthedocs.io/en/latest/?badge=latest
