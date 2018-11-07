@@ -9,29 +9,58 @@ Timeline
 
 Wednesday meeting: Set weekly goals and progress update? 
 
-===================  =============== 
-Important Date       Plan            
-===================  =============== 
-16 Oct 2018          Initial meeting. 
-24 Oct 2018          **Implementation**: Prepare the machines to the :ref:`prerequisites` state and **document** for initializing the machines. 
+.. tabularcolumns:: |l|p{14cm}|
+
+================  ============================== 
+Important Date    Plan            
+================  ============================== 
+16 Oct 2018       Initial meeting. 
+24 Oct 2018       **Implementation**: Prepare the machines to the :ref:`prerequisites` state and **document** for initializing the machines. 
                      
-                     **Testing**: Prepare the plan and, if possible, automate script to test initail services in :ref:`prerequisites`.
-31 Oct 2018          **Implementation**: Implementation document for SLURM
+                  **Testing**: Prepare the plan and, if possible, automate script to test initail services in :ref:`prerequisites`.
+31 Oct 2018       **Implementation**: Implementation document for SLURM
                      
-                     **Testing**: Plan and testing script for SLURM. 
-07 Nov 2018          **Implementation**: 
+                  **Testing**: Plan and testing script for SLURM. 
+16 Nov 2018       **Implementation**: 
+
+                  * New VM environment 
+                  * SLURM plugins: 
+
+                    * PAM 
+                    * cgroup 
+                    * nhc  
+                    * PMIx
+
+                  * SLURM preemption
+                  * Setting up separate DNS using BIND
+                  * Setting up lmod/EasyBuild
+                
+                    * ``foss``
+                    * ``mpi-foss``
+                    * ``lampps``
+
+                  * freeipa-server + free-client. 
+                    
+                  **Config**:
+
+                  * ``gres.conf``
+                  * ``topology.conf``
+                  * Code repository for SLURM config.
+
+                  **Testing**: 
+
+                  * SLURM basic function
+                  * VM Topology
+                  * freeipa + dns separation 
+                  * Installation document
+
+21 Nov 2018       **Implementation**: 
                      
-                     **Testing**:                      
-14 Nov 2018          **Implementation**: 
+                  **Testing**:                      
+28 Nov 2018       **Implementation**: 
                      
-                     **Testing**:                      
-21 Nov 2018          **Implementation**: 
-                     
-                     **Testing**:                      
-28 Nov 2018          **Implementation**: 
-                     
-                     **Testing**:                      
-===================  =============== 
+                  **Testing**:                      
+================  ============================== 
 
 Teams
 ===========
@@ -78,6 +107,12 @@ Prerequisites
 
 * A Unix user **slurm** for use by ``slurmctld`` on all nodes of the cluster. 
 
+Adding users
+===============
+
+* Add user in ``freeipa``
+* Add user in SLURM through ``sacctmgr``. command ? 
+
 Machine Configuration
 ======================
 
@@ -90,7 +125,7 @@ slurmdbd      slurmdbd                                172.21.5.4       VM
 mysql         mysql                                   172.21.5.5       VM
 frontend      tara-frontend-1       172.20.1.2        172.21.1.2
 compute       tara-c-[001-006]      172.20.10.1 -     172.21.10.1 -
-                                    172.20.10.6       172.20.10.6
+                                    172.20.10.6       172.21.10.6
 memory        tara-m-[001-002]      172.20.20.1 -     172.21.20.1 -    FAT nodes
                                     172.20.20.2       172.21.20.2
 dgx           tara-dgx1-[001-002]   172.20.31.1 -     172.21.31.1 -    dgx1 is reserved. 
